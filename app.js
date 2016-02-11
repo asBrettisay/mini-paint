@@ -1,7 +1,20 @@
 var color = 'white';
 var colors = 'white green red blue yellow';
+var box = $('.box');
 
 $(document).ready(function() {
+
+  var isDragging = false;
+  box.mousedown(function() {
+    isDragging = true;
+  })
+  box.mouseup(function() {
+    isDragging = false;
+  })
+
+
+
+
   $('#red').on('click', function() {
     color = 'red';
   });
@@ -17,15 +30,20 @@ $(document).ready(function() {
   $('#white').on('click', function() {
     color = 'white';
   });
-  $('.box').on('click', function() {
+  box.on('click', function() {
     $(this).addClass(color);
   });
 
-  $('.box').on('dblclick', function() {
+  box.on('dblclick', function() {
     $(this).removeClass(color);
   });
+  box.on('mouseover', function() {
+    if (isDragging) {
+      $(this).addClass(color);
+    }
+  })
 
   $('#reset').on('click', function() {
-    $('.box').removeClass(colors);
+    box.removeClass(colors);
   });
 })
